@@ -1,0 +1,15 @@
+'use client';
+
+import { useState } from 'react';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+
+const data = {
+  pt: { kicker: 'Sobre a HortiVita', title: 'Tecnologia que aproxima pessoas, plantas e alimento.', lead: 'Uma solução de cultivo criada para integrar natureza, autonomia e conforto a qualquer ambiente.', section: 'Nossa origem', headline: 'Alimento fresco não precisa estar longe.', body: 'A HortiVita nasceu para tornar o cultivo hidropônico mais simples, acessível e integrado à vida cotidiana. Seu formato circular distribui as plantas em prateleiras móveis, aproxima cada vaso das mãos e equilibra a exposição à luz e à água.', historyTitle: 'Uma ideia guiada por autonomia, conforto e natureza.', history: ['O projeto surgiu da vontade de aproximar as pessoas do alimento que consomem, mesmo em locais sem quintal ou luz natural suficiente.', 'A estrutura elevada elimina a necessidade de se abaixar para plantar, acompanhar e colher. O movimento das prateleiras torna cada planta acessível e ajuda a distribuir os recursos de cultivo.'], quote: 'Não é apenas uma horta. É uma nova forma de conviver com o alimento.' },
+  en: { kicker: 'About HortiVita', title: 'Technology that brings people, plants and food together.', lead: 'A growing solution designed to bring nature, autonomy and comfort into any environment.', section: 'Our origin', headline: 'Fresh food does not need to be far away.', body: 'HortiVita was born to make hydroponic growing simpler, more accessible and part of everyday life. Its circular shape arranges plants on moving shelves, brings every pot within reach and balances exposure to light and water.', historyTitle: 'An idea guided by autonomy, comfort and nature.', history: ['The project grew from a desire to reconnect people with the food they eat, even in places without a garden or enough natural light.', 'Its elevated structure removes the need to bend down to plant, monitor or harvest. Moving shelves bring every plant within reach and help distribute growing resources.'], quote: 'It is more than a garden. It is a new way to live with our food.' },
+} as const;
+
+export default function Sobre() {
+  const [lang,setLang]=useState<'pt'|'en'>('pt'); const t=data[lang];
+  return <main><SiteHeader solid lang={lang} onToggle={()=>setLang(lang==='pt'?'en':'pt')}/><section className="sub-hero"><p className="eyebrow"><span/>{t.kicker}</p><h1>{t.title}</h1><p>{t.lead}</p></section><section className="about-intro"><div><p className="section-index">01 / {t.section}</p><h2>{t.headline}</h2></div><p>{t.body}</p></section><section className="history-grid"><div className="history-visual"><img src="/roots.webp" alt={lang==='pt'?'Raízes saudáveis de uma hortaliça':'Healthy roots of a leafy green'}/><span>DESIGN<br/>+ VIDA</span></div><div className="history-copy"><span className="big-index">02</span><h3>{t.historyTitle}</h3>{t.history.map(p=><p key={p}>{p}</p>)}</div></section><blockquote className="manifesto"><span>“</span><p>{t.quote}</p></blockquote><SiteFooter lang={lang}/></main>;
+}

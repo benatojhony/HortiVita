@@ -8,9 +8,9 @@ type Props = { lang: 'pt' | 'en'; onToggle: () => void; solid?: boolean };
 export function SiteHeader({ lang, onToggle, solid = false }: Props) {
   const [open, setOpen] = useState(false);
   const labels = lang === 'pt'
-    ? ['Sobre', 'Como funciona', 'Modelos', 'Projetos', 'Recursos']
-    : ['About', 'How it works', 'Models', 'Projects', 'Resources'];
-  const links = ['/#sobre', '/#funcionamento', '/#modelos', '/#projetos', '/recursos'];
+    ? ['Início', 'Sobre', 'Como funciona', 'Modelos', 'Projetos', 'Recursos']
+    : ['Home', 'About', 'How it works', 'Models', 'Projects', 'Resources'];
+  const links = ['/', '/sobre', '/como-funciona', '/modelos', '/projetos', '/recursos'];
   return (
     <header className={`site-header ${solid ? 'solid' : ''}`}>
       <a className="brand" href="/" aria-label="HortiVita"><span className="brand-mark"><i /></span><span>HORTI<span>VITA</span></span></a>
