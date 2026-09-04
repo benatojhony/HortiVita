@@ -13,7 +13,7 @@ export function SiteHeader({ lang, onToggle, solid = false }: Props) {
   const links = ['/', '/sobre', '/como-funciona', '/modelos', '/projetos', '/recursos'];
   return (
     <header className={`site-header ${solid ? 'solid' : ''}`}>
-      <a className="brand" href="/" aria-label="HortiVita"><span className="brand-mark"><i /></span><span>HORTI<span>VITA</span></span></a>
+      <a className="brand brand-official" href="/" aria-label="HortiVita"><img src="/brand-logo.webp" alt="HortiVita" /></a>
       <nav className={open ? 'nav open' : 'nav'} aria-label={lang === 'pt' ? 'Principal' : 'Main'}>
         {labels.map((item, i) => <a key={item} href={links[i]} onClick={() => setOpen(false)}>{item}</a>)}
       </nav>
