@@ -4,6 +4,7 @@ import { ArrowDownToLine, BookOpen, Droplets, FileText, Leaf, ShieldCheck } from
 import { useState } from 'react';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
+import { sitePath } from '@/lib/site-path';
 
 const data = {
   pt: {
@@ -40,8 +41,8 @@ export default function Recursos() {
   const [lang,setLang] = useState<'pt'|'en'>('pt'); const t=data[lang];
   return <main><SiteHeader solid lang={lang} onToggle={() => setLang(lang==='pt'?'en':'pt')}/>
     <section className="sub-hero"><p className="eyebrow"><span/>{t.kicker}</p><h1>{t.title}</h1><p>{t.lead}</p></section>
-    <section className="featured-resource"><div className="featured-art"><FileText/><span>NUTRIÇÃO<br/>VEGETAL</span><b>01</b></div><div><p className="section-index">01 / {t.featured}</p><h2>{t.featuredTitle}</h2><p>{t.featuredText}</p><a className="button primary" href="/recursos/guia-deficiencias-nutricionais.pdf" download>{t.download}<ArrowDownToLine size={18}/></a></div></section>
-    <section className="deficiency-showcase"><div className="deficiency-heading"><p className="section-index">02 / {t.examplesKicker}</p><h2>{t.examplesTitle}</h2><p>{t.examplesText}</p></div><div className="deficiency-gallery">{t.exampleNames.map((name,i)=><a key={name} href={`/deficiencias/deficiencia-${87+i}.webp`} target="_blank"><img src={`/deficiencias/deficiencia-${87+i}.webp`} alt={`${t.examplesKicker}: ${name}`}/><span><b>{name}</b><small>{t.openExample}</small></span></a>)}</div></section>
-    <section className="library"><div className="section-heading"><p className="section-index">03 / DOWNLOADS</p><h2>{t.title2}</h2></div><div className="library-grid">{t.cards.map(([title,text,label,href],i) => { const Icon=icons[i]; const pending=href==='#'; return <article className={pending?'pending':''} key={title}><div><Icon/><span>0{i+1}</span></div><h3>{title}</h3><p>{text}</p>{pending?<span className="resource-link disabled">{label}</span>:<a className="resource-link" href={href} target="_blank">{label}<ArrowDownToLine size={16}/></a>}</article>})}</div></section>
+    <section className="featured-resource"><div className="featured-art"><FileText/><span>NUTRIÇÃO<br/>VEGETAL</span><b>01</b></div><div><p className="section-index">01 / {t.featured}</p><h2>{t.featuredTitle}</h2><p>{t.featuredText}</p><a className="button primary" href={sitePath('/recursos/guia-deficiencias-nutricionais.pdf')} download>{t.download}<ArrowDownToLine size={18}/></a></div></section>
+    <section className="deficiency-showcase"><div className="deficiency-heading"><p className="section-index">02 / {t.examplesKicker}</p><h2>{t.examplesTitle}</h2><p>{t.examplesText}</p></div><div className="deficiency-gallery">{t.exampleNames.map((name,i)=>{const imagePath=sitePath(`/deficiencias/deficiencia-${87+i}.webp`);return <a key={name} href={imagePath} target="_blank"><img src={imagePath} alt={`${t.examplesKicker}: ${name}`}/><span><b>{name}</b><small>{t.openExample}</small></span></a>})}</div></section>
+    <section className="library"><div className="section-heading"><p className="section-index">03 / DOWNLOADS</p><h2>{t.title2}</h2></div><div className="library-grid">{t.cards.map(([title,text,label,href],i) => { const Icon=icons[i]; const pending=href==='#'; return <article className={pending?'pending':''} key={title}><div><Icon/><span>0{i+1}</span></div><h3>{title}</h3><p>{text}</p>{pending?<span className="resource-link disabled">{label}</span>:<a className="resource-link" href={sitePath(href)} target="_blank">{label}<ArrowDownToLine size={16}/></a>}</article>})}</div></section>
     <aside className="knowledge-note"><div><Droplets/><h3>{t.noteTitle}</h3></div><p>{t.note}</p><small>{t.disclaimer}</small></aside><SiteFooter lang={lang}/></main>;
 }

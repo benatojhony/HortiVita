@@ -4,6 +4,7 @@ import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Boxes, FolderKanban
 import { useState } from 'react';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
+import { sitePath } from '@/lib/site-path';
 
 const content = {
   pt: {
@@ -34,16 +35,16 @@ export default function Home() {
   return <main>
     <SiteHeader lang={lang} onToggle={() => setLang(lang === 'pt' ? 'en' : 'pt')} />
     <section className="hero" id="top">
-      <div className="hero-copy"><p className="eyebrow"><span />{t.eyebrow}</p><h1>{t.titleA}<br /><em>{t.titleB}</em></h1><p className="hero-lead">{t.lead}</p><div className="hero-actions"><a className="button primary" href="/como-funciona">{t.primary}<ArrowDownRight size={19} /></a><a className="button ghost" href="/modelos">{t.secondary}<ArrowUpRight size={18} /></a></div></div>
-      <div className="hero-visual"><img src="/hero.webp" alt={t.alt} /><div className="orbit-label"><span>01</span><b>HIDROPONIA<br />EM MOVIMENTO</b></div><span className="hero-number">01</span></div><a href="#explorar" className="scroll-cue"><span>{t.explore}</span><ArrowDownRight /></a>
+      <div className="hero-copy"><p className="eyebrow"><span />{t.eyebrow}</p><h1>{t.titleA}<br /><em>{t.titleB}</em></h1><p className="hero-lead">{t.lead}</p><div className="hero-actions"><a className="button primary" href={sitePath('/como-funciona')}>{t.primary}<ArrowDownRight size={19} /></a><a className="button ghost" href={sitePath('/modelos')}>{t.secondary}<ArrowUpRight size={18} /></a></div></div>
+      <div className="hero-visual"><img src={sitePath('/hero.webp')} alt={t.alt} /><div className="orbit-label"><span>01</span><b>HIDROPONIA<br />EM MOVIMENTO</b></div><span className="hero-number">01</span></div><a href="#explorar" className="scroll-cue"><span>{t.explore}</span><ArrowDownRight /></a>
     </section>
     <section className="stat-bar">{t.stats.map(([value,label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}</section>
     <section className="home-showcase">
-      <a className="showcase-main" href="/como-funciona"><img src="/product-installation.webp" alt={lang === 'pt' ? 'Sistemas HortiVita com prateleiras e vasos de cultivo' : 'HortiVita systems with shelves and growing pots'} /><span>{lang === 'pt' ? 'Veja a máquina de perto' : 'See the machine up close'}<ArrowUpRight /></span></a>
-      <a className="showcase-side" href="/sobre"><img src="/brand-post.webp" alt={lang === 'pt' ? 'Publicação da marca HortiVita' : 'HortiVita brand post'} /><span>{lang === 'pt' ? 'Verde que gira. Vida que cresce.' : 'Green that turns. Life that grows.'}</span></a>
+      <a className="showcase-main" href={sitePath('/como-funciona')}><img src={sitePath('/product-installation.webp')} alt={lang === 'pt' ? 'Sistemas HortiVita com prateleiras e vasos de cultivo' : 'HortiVita systems with shelves and growing pots'} /><span>{lang === 'pt' ? 'Veja a máquina de perto' : 'See the machine up close'}<ArrowUpRight /></span></a>
+      <a className="showcase-side" href={sitePath('/sobre')}><img src={sitePath('/brand-post.webp')} alt={lang === 'pt' ? 'Publicação da marca HortiVita' : 'HortiVita brand post'} /><span>{lang === 'pt' ? 'Verde que gira. Vida que cresce.' : 'Green that turns. Life that grows.'}</span></a>
     </section>
-    <section className="home-directory" id="explorar"><div className="section-heading"><p className="section-index">02 / {t.discover}</p><h2>{t.discoverTitle}</h2></div><div className="directory-grid">{t.cards.map(([title,text,href],i) => { const Icon=cardIcons[i]; return <a href={href} key={title}><div><Icon/><span>0{i+1}</span></div><h3>{title}</h3><p>{text}</p><b>{t.open}<ArrowRight size={17}/></b></a>})}</div></section>
-    <section className="closing-cta compact"><p>{t.ctaTitle}</p><div><span>{t.ctaText}</span><a href="/contato">{t.ctaButton}<ArrowUpRight/></a></div></section>
+    <section className="home-directory" id="explorar"><div className="section-heading"><p className="section-index">02 / {t.discover}</p><h2>{t.discoverTitle}</h2></div><div className="directory-grid">{t.cards.map(([title,text,href],i) => { const Icon=cardIcons[i]; return <a href={sitePath(href)} key={title}><div><Icon/><span>0{i+1}</span></div><h3>{title}</h3><p>{text}</p><b>{t.open}<ArrowRight size={17}/></b></a>})}</div></section>
+    <section className="closing-cta compact"><p>{t.ctaTitle}</p><div><span>{t.ctaText}</span><a href={sitePath('/contato')}>{t.ctaButton}<ArrowUpRight/></a></div></section>
     <SiteFooter lang={lang}/>
   </main>;
 }
