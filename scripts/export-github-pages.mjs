@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { copyFile, mkdir, writeFile } from 'node:fs/promises';
+import { copyFile, cp, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const routes = ['', 'sobre', 'como-funciona', 'modelos', 'projetos', 'recursos', 'contato'];
@@ -39,6 +39,21 @@ try {
     await mkdir(directory, { recursive: true });
     await writeFile(path.join(directory, 'index.html'), html, 'utf8');
   }
+
+  // Vinext places framework assets inside the configured base path. GitHub
+  // Pages already mounts the artifact at /HortiVita, so the artifact itself
+  // must expose `_next` at its root to avoid a duplicated path at runtime.
+  const generatedNextDirectory = path.join(
+    'dist',
+    'client',
+    basePath.replace(/^\/+|\/+$/g, ''),
+    '_next',
+  );
+  await cp(generatedNextDirectory, path.join('dist', 'client', '_next'), {
+    recursive: true,
+    force: true,
+  });
+
   await writeFile(path.join('dist', 'client', '.nojekyll'), '', 'utf8');
   await copyFile(path.join('dist', 'client', 'index.html'), path.join('dist', 'client', '404.html'));
   console.log(`Site estático gerado com ${routes.length} páginas.`);
